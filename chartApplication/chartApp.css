@@ -1,0 +1,8 @@
+#board {
+  width: 400px;
+  height: 200px;
+  min-width: 400px;
+  max-width: 100%;
+  border: 1px solid black;
+  background-color: #eee;
+}
