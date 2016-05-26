@@ -2,51 +2,82 @@
 
 let canvas = 0;  
 let appCtx = 0;
+let chartDiagram = '';
+let chartLabels = [];
+let chartValues = [];
 
 // Check that the browser is compatible with Html5 Canvas
 
 function checkCompatibility(){
     canvas = document.getElementById('board');    
     if (canvas.getContext){
-        appCtx = canvas.getContext('2d');
-        draw('piechart');
+        appCtx = canvas.getContext('2d');      
     }
     else {
-
+      alert('Your current browser is not compatible with this application. Please try a different one.');
     }
 }
+
+// Accept user data input and display the last entry by user
+
+function lastData() {
+    let lastLabel= document.getElementById('fm1').elements[4].value;
+    let lastValues= document.getElementById('fm1').elements[5].value;
+    let lastEntered= 'Last data entered: ' +  'Label: ' + lastLabel + ', ' + 'Value: ' + lastValues;    
+    document.getElementById('feedback').innerHTML = lastEntered;   
+    chartLabels.push(lastLabel);
+    chartValues.push(lastValues);
+}
+
+// Accept user command to draw
+
+function drawSelect(){
+    let radios = document.getElementsByName('chart');
+    for (i = 0, length = radios.length; i < length; i++) {
+        if (radios[i].checked) {            
+            confirm('You are about to draw a ' + radios[i].value);
+            chartDiagram =  radios[i].value;           
+
+            // only one radio can be logically checked, don't check the rest
+            break;
+        }
+    }    
+    draw(chartDiagram);
+    chartLabels = [];
+    chartValues = [];
+}
+
+
+
+
 
 //Draw cases
 
 function draw(chartType){
     switch(chartType){
-        case 'piechart':
-            //pieChart(parseInt(prompt('value')));
-            pieChart([ 0.41887902047863906, 0.8377580409572781, 1.2566370614359172, 1.6755160819145563, 2.0943951023931953 ]);
+        case 'Pie Chart':            
+            pieChart(chartLabels,[ 0.41887902047863906, 0.8377580409572781, 1.2566370614359172, 1.6755160819145563, 2.0943951023931953 ]);
             break;
 
-        case 'histogram':
-            //histogram(parseInt(prompt('height value')));
-            //histogram(['a','b','c','d','e','f'],[120,40,60,80,100,50]);
+        case 'Histogram':            
+            histogram(chartLabels,[120,40,60,80,100,50]);
             break;
 
-        case 'barchart':
-            //barChart(parseInt(prompt('height value')));
-            //barChart(['a','b','c','d','e','f'],[110,40,60,80,100,50]);
+        case 'Bar Chart':            
+            barChart(chartLabels,[110,40,60,80,100,50]);
             break;
 
-        case 'linechart':
-            //lineChart(parseInt(prompt('height value')));
-            //lineChart(['a','b','c','d','e','f'],[110,40,60,80,100,50]);
+        case 'Line Chart':            
+            lineChart(chartLabels,[110,40,60,80,100,50]);
             break;
 
         //case 'expiechart':
-            //pieChart(parseInt(prompt('value')));
+            
           //  exPieChart([ Math.PI/4, Math.PI/2, 3*Math.PI/4, Math.PI, 5*Math.PI/4, 3*Math.PI/2, 7*Math.PI/4, 2*Math.PI]);
             //break;
 
         default:
-            alert('Input not understood, please try again');
+            alert('Input not understood, please refresh page and try again');
             //draw();
     }    
 }
@@ -55,17 +86,16 @@ function draw(chartType){
 
 //Pie Chart
 
-function pieChart(arr){
+function pieChart(arr1,arr2){
     let pieStart = 0;
     let pieEnd = 0;
-    for(i=0; i<arr.length; i++){
+    for(i=0; i<arr2.length; i++){
         pieStart = pieEnd;
-        pieEnd += arr[i];
+        pieEnd += arr2[i];
+        
+        //appCtx.strokeStyle = 'rgba(' + Math.floor(255-128*i/arr.length) +',' + Math.floor(128*i/arr.length) + ',' + Math.floor(255*i/arr.length) + ',1)';
 
-        //appCtx.strokeStyle = 'rgba(0,128,0,1)';
-
-        appCtx.strokeStyle = 'rgba(' + 50*i +',' + 40*i + ',' + 0 + ',1)';
-        appCtx.fillStyle = 'rgba(' + 50*i +',' + 40*i + ',' + 0 + ',1)';
+        appCtx.fillStyle = 'rgba(' + Math.floor(128-128*i/arr2.length) +',' + Math.floor(128*i/arr2.length) + ',' + Math.floor(255*i/arr2.length) + ',1)';
 
         appCtx.beginPath();
         appCtx.arc(150, 75, 60, pieStart, pieEnd);
@@ -80,10 +110,12 @@ function histogram(arr1, arr2){
     for(i=0; i<arr2.length; i++){
         appCtx.beginPath();
 
-        //appCtx.fillStyle ="cyan";
+        //appCtx.strokeStyle = 'rgba(' + Math.floor(255-128*i/arr.length) +',' + Math.floor(128*i/arr.length) + ',' + Math.floor(255*i/arr.length) + ',1)';
+
+        //appCtx.fillStyle = 'rgba(' + Math.floor(255-128*i/arr.length) +',' + Math.floor(128*i/arr.length) + ',' + Math.floor(255*i/arr.length) + ',1)';
 
         appCtx.strokeRect(45+40*i,120-arr2[i],40,arr2[i]);
-        appCtx.font = "7px arial";
+        appCtx.font = '7px arial';
         appCtx.fillText(arr1[i], 45+40*i,130);
     };
 }
@@ -94,10 +126,10 @@ function barChart(arr1, arr2){
     for(i=0; i<arr2.length; i++){
         appCtx.beginPath();
 
-        //appCtx.fillStyle ="cyan";
+        //appCtx.fillStyle ='cyan';
 
         appCtx.fillRect(45+40*i,120-arr2[i],30,arr2[i]);
-        appCtx.font = "7px arial";
+        appCtx.font = '7px arial';
         appCtx.fillText(arr1[i], 45+40*i,130);
     };
 }
@@ -111,9 +143,9 @@ function lineChart(arr1, arr2){
         appCtx.lineTo(45+40*i,120-arr2[i]);
         appCtx.stroke();
 
-        //appCtx.fillStyle ="cyan";        
+        //appCtx.fillStyle ='cyan';        
 
-        appCtx.font = "7px arial";
+        appCtx.font = '7px arial';
         appCtx.fillText(arr1[i], 45+40*i,130);
         appCtx.fillText(arr1[i], 45+40*i,120-arr2[i]);
     };
@@ -163,3 +195,4 @@ function valueAngle(arr){
 
 
 var b= a.map(valueAngle);
+
