@@ -22,8 +22,8 @@ function checkCompatibility(){
 // Accept user data input and display the last entry by user
 
 function lastData() {
-    let lastLabel= document.getElementById('fm1').elements[4].value;
-    let lastValues= document.getElementById('fm1').elements[5].value;
+    let lastLabel= document.getElementById('fm1').elements[5].value;
+    let lastValues= document.getElementById('fm1').elements[6].value;
     let lastEntered= 'Last data entered: ' +  'Label: ' + lastLabel + ', ' + 'Value: ' + lastValues;    
     document.getElementById('feedback').innerHTML = lastEntered;   
     chartLabels.push(lastLabel);
@@ -73,10 +73,9 @@ function draw(chartType){
             lineChart(chartLabels,chartValues);
             break;
 
-        //case 'expiechart':
-            
-          //  exPieChart([ Math.PI/4, Math.PI/2, 3*Math.PI/4, Math.PI, 5*Math.PI/4, 3*Math.PI/2, 7*Math.PI/4, 2*Math.PI]);
-            //break;
+        case 'Table Chart':            
+            tableChart(chartLabels,chartValues);
+            break;
 
         default:
             alert('Input not understood, please refresh page and try again');
@@ -104,8 +103,8 @@ function pieChart(arr1,arr2){
         appCtx.lineTo(150,75);
         appCtx.fill();
 
-        //appCtx.font = '7px arial';
-        //appCtx.fillText(arr1[i], 45+40*i,130);    
+        appCtx.font = '7px arial';
+        appCtx.fillText(arr1[i], 45+40*i,130);    
     };
 }
 
@@ -167,5 +166,34 @@ function lineChart(arr1, arr2){
         appCtx.font = '7px arial';
         appCtx.fillText(arr1[i], 45+40*i,130);
         appCtx.fillText(arr1[i], 45+40*i,120-normalize(i, arr2));
+    };
+}
+
+//Table of Values
+
+
+function tableHeading() {
+    appCtx.beginPath();
+    appCtx.strokeRect(45, 0, 120, 15);
+
+    appCtx.font = '10px arial';
+    appCtx.fillText('Data Labels', 65, 10);
+
+    appCtx.strokeRect(165, 0, 120, 15);
+    appCtx.fillText('Data Values', 185, 10);
+
+    appCtx.strokeStyle = 'black';       
+}
+
+
+function tableChart(arr1, arr2){
+    tableHeading();
+    for(i=0; i<arr2.length; i++){
+       // appCtx.fillStyle = 'rgba(' + Math.floor(255-128*i/arr2.length) +',' + Math.floor(128*i/arr2.length) + ',' + Math.floor(255*i/arr2.length) + ',1)';   
+        appCtx.strokeRect(45,15+15*i,120,15);
+        appCtx.strokeRect(165,15+15*i,120,15);
+        appCtx.font = '10px arial';
+        appCtx.fillText(arr1[i], 65,25+15*i);
+        appCtx.fillText(arr2[i], 185,25+15*i);
     };
 }
