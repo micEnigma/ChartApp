@@ -22,7 +22,7 @@ function checkCompatibility() {
     }
 }
 
-// Accept user data input and display the last entry by user
+// Accept user data input and display entries by the user
 
 function lastData() {
     let lastLabel= document.getElementById('fm1').elements[5].value;
@@ -111,7 +111,7 @@ function pieChart(arr1,arr2){
         pieStart = pieEnd;
         pieEnd += arr2[i];        
         
-        // this automatically changes the colour of the chart sectors from red to blue
+        // this changes the colour of the chart sectors from red through to blue
         appCtx.fillStyle = 'rgba(' + Math.floor(128-128*i/arr2.length) +',' + Math.floor(192*i/arr2.length) + ',' + Math.floor(255*i/arr2.length) + ',0.8)';
 
         appCtx.beginPath();
@@ -121,7 +121,10 @@ function pieChart(arr1,arr2){
 
         appCtx.font = '10px arial';        
         appCtx.fillText('Legend by colour: ', 200,20);
-        appCtx.fillText(arr1[i], 200, 35+15*i);               
+        appCtx.fillText('Label', 200, 35); 
+        appCtx.fillText('Value', 250, 35);  
+        appCtx.fillText(arr1[i], 200, 50+15*i);  
+        appCtx.fillText(chartValues[i], 250, 50+15*i);               
     };
 }
 
@@ -154,6 +157,8 @@ function histogram(arr1, arr2){
         appCtx.fillRect(45+40*i,120-normalize(i, arr2),40,normalize(i, arr2));        
         appCtx.font = '7px arial';
         appCtx.fillText(arr1[i], 45+40*i,130);
+        appCtx.fillStyle = 'black'
+        appCtx.fillText(arr2[i], 45+40*i,125-normalize(i, arr2));
     };
 }
 
@@ -163,9 +168,11 @@ function barChart(arr1, arr2){
     xYAxis();
     for(i=0; i<arr2.length; i++){
         appCtx.fillStyle = 'rgba(' + Math.floor(255-128*i/arr2.length) +',' + Math.floor(128*i/arr2.length) + ',' + Math.floor(255*i/arr2.length) + ',1)';   
-        appCtx.fillRect(55+40*i,120-normalize(i, arr2),30,normalize(i, arr2));
+        appCtx.fillRect(55+45*i,120-normalize(i, arr2),30,normalize(i, arr2));
         appCtx.font = '7px arial';
-        appCtx.fillText(arr1[i], 55+40*i,130);
+        appCtx.fillText(arr1[i], 55+45*i,130);
+        appCtx.fillStyle = 'black'
+        appCtx.fillText(arr2[i], 47+45*i,125-normalize(i, arr2));
     };
 }
 
@@ -180,7 +187,7 @@ function lineChart(arr1, arr2){
         appCtx.strokeStyle= 'blue';
         appCtx.font = '7px arial';
         appCtx.fillText(arr1[i], 45+40*i,130);
-        appCtx.fillText(arr1[i], 45+40*i,120-normalize(i, arr2));
+        appCtx.fillText(arr2[i], 46+40*i,128-normalize(i, arr2));
     };
 }
 
