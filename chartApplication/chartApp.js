@@ -27,6 +27,7 @@ function checkCompatibility() {
 function enterData() {
     let lastLabel= document.getElementById('Dlabel').value;
     let lastValues= parseInt(document.getElementById('Dvalue').value);
+    // Disallow users from inputing negative numbers
     if(lastValues < 0) {
         alert('Negative values are not accepted in this version, think positively');
     }
