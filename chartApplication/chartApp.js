@@ -58,7 +58,7 @@ function delData() {
 
 function drawSelected(){
     if (chartValues.length === 0) {
-        alert('You have not entered any values yet, please enter some and try again.')
+        alert('You have not entered any values yet, please enter some values and try again.')
     }
     else {
         let radios = document.getElementsByName('chart');
