@@ -144,22 +144,22 @@ function normalize(num,arr2) {
 //This function draws the X and Y axes on the canvas
 
 function xYAxis() {
-    appCtx.beginPath();
-    appCtx.moveTo(45,0);
-    appCtx.lineTo(45,120);
-    appCtx.lineTo(300,120);
-    appCtx.strokeStyle = 'black';
-    appCtx.stroke();
-    appCtx.moveTo(45,0);
+    if(arr2.length !== 0){
+        appCtx.beginPath();
+        appCtx.moveTo(45,0);
+        appCtx.lineTo(45,120);
+        appCtx.lineTo(300,120);
+        appCtx.strokeStyle = 'black';
+        appCtx.stroke();
+        appCtx.moveTo(45,0);
+    }    
 }
 
 //Histogram
 
-function histogram(arr1, arr2){   
-    if(arr2.length !== 0){
-        xYAxis();
-    }
-    
+function histogram(arr1, arr2){     
+    xYAxis();
+        
     for(i=0; i<arr2.length; i++){        
 
         appCtx.fillStyle = 'rgba(' + Math.floor(255-128*i/arr2.length) +',' + Math.floor(128*i/arr2.length) + ',' + Math.floor(255*i/arr2.length) + ',1)';        
@@ -175,9 +175,7 @@ function histogram(arr1, arr2){
 //Bar Chart
 
 function barChart(arr1, arr2){
-    if(arr2.length !== 0){
-        xYAxis();
-    }
+    xYAxis();
     
     for(i=0; i<arr2.length; i++){
         appCtx.fillStyle = 'rgba(' + Math.floor(255-128*i/arr2.length) +',' + Math.floor(128*i/arr2.length) + ',' + Math.floor(255*i/arr2.length) + ',1)';   
@@ -192,9 +190,7 @@ function barChart(arr1, arr2){
 //Line Chart
 
 function lineChart(arr1, arr2){
-    if(arr2.length !== 0){
-        xYAxis();
-    }
+    xYAxis();    
         
     appCtx.moveTo(45,120-normalize(0, arr2));
     for(i=0; i<arr2.length; i++){        
