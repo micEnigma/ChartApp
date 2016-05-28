@@ -24,15 +24,21 @@ function checkCompatibility() {
 
 // Accept user data input and display entries by the user
 
-function lastData() {
+function enterData() {
     let lastLabel= document.getElementById('Dlabel').value;
-    let lastValues= document.getElementById('Dvalue').value;    
-    chartLabels.push(lastLabel);
-    chartValues.push(parseInt(lastValues));
-    valueTotal += parseInt(lastValues)
-    let lastEntered= 'Data entered: ' + 'Label: ' + chartLabels + ', ' + 'Value: ' + chartValues;       
-    document.getElementById('feedback').innerHTML = lastEntered;       
-}
+    let lastValues= parseInt(document.getElementById('Dvalue').value);
+    if(lastValues < 0) {
+        alert('Negative values are not accepted in this version, think positively');
+    }
+    else {
+        chartLabels.push(lastLabel);
+        chartValues.push(lastValues);
+        valueTotal += lastValues;
+        let lastEntered= 'Data entered: ' + 'Label: ' + chartLabels + ', ' + 'Value: ' + chartValues;    
+        document.getElementById('feedback').innerHTML = lastEntered;       
+    }
+}    
+    
 
 // Delete the last data entered to correct errors
 
