@@ -25,8 +25,8 @@ function checkCompatibility() {
 // Accept user data input and display entries by the user
 
 function lastData() {
-    let lastLabel= document.getElementById('fm1').elements[5].value;
-    let lastValues= document.getElementById('fm1').elements[6].value;    
+    let lastLabel= document.getElementById('Dlabel').value;
+    let lastValues= document.getElementById('Dvalue').value;    
     chartLabels.push(lastLabel);
     chartValues.push(parseInt(lastValues));
     valueTotal += parseInt(lastValues)
