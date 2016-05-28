@@ -156,7 +156,10 @@ function xYAxis() {
 //Histogram
 
 function histogram(arr1, arr2){   
-    xYAxis();
+    if(arr2.length !== 0){
+        xYAxis();
+    }
+    
     for(i=0; i<arr2.length; i++){        
 
         appCtx.fillStyle = 'rgba(' + Math.floor(255-128*i/arr2.length) +',' + Math.floor(128*i/arr2.length) + ',' + Math.floor(255*i/arr2.length) + ',1)';        
@@ -172,7 +175,10 @@ function histogram(arr1, arr2){
 //Bar Chart
 
 function barChart(arr1, arr2){
-    xYAxis();
+    if(arr2.length !== 0){
+        xYAxis();
+    }
+    
     for(i=0; i<arr2.length; i++){
         appCtx.fillStyle = 'rgba(' + Math.floor(255-128*i/arr2.length) +',' + Math.floor(128*i/arr2.length) + ',' + Math.floor(255*i/arr2.length) + ',1)';   
         appCtx.fillRect(55+45*i,120-normalize(i, arr2),30,normalize(i, arr2));
@@ -186,7 +192,10 @@ function barChart(arr1, arr2){
 //Line Chart
 
 function lineChart(arr1, arr2){
-    xYAxis();    
+    if(arr2.length !== 0){
+        xYAxis();
+    }
+        
     appCtx.moveTo(45,120-normalize(0, arr2));
     for(i=0; i<arr2.length; i++){        
         appCtx.lineTo(45+40*i,120-normalize(i, arr2));
@@ -214,7 +223,10 @@ function tableHeading() {
 }
 
 function tableChart(arr1, arr2){
-    tableHeading();
+    if(arr2.length !== 0){
+        tableHeading();
+    }
+    
     for(i=0; i<arr2.length; i++){
      
         appCtx.strokeRect(45,15+15*i,120,15);
