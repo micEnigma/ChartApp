@@ -39,7 +39,6 @@ function enterData() {
         document.getElementById('feedback').innerHTML = lastEntered;       
     }
 }    
-    
 
 // Delete the last data entered to correct errors
 
@@ -126,19 +125,21 @@ function pieChart(arr1,arr2){
         pieEnd += arr2[i];        
         
         // this changes the colour of the chart sectors from red through to blue
-        appCtx.fillStyle = 'rgba(' + Math.floor(128-128*i/arr2.length) +',' + Math.floor(192*i/arr2.length) + ',' + Math.floor(255*i/arr2.length) + ',0.8)';
+        appCtx.fillStyle = 'rgba(' + 127*(Math.floor(i+1)%3) +',' + 127*(Math.floor((i+1)/9)%3) + ',' + 127*(Math.floor((i+1)/3)%3) + ',.8)';
 
         appCtx.beginPath();
         appCtx.arc(100, 75, 60, pieStart, pieEnd);
         appCtx.lineTo(100,75);
+        //appCtx.stroke();
         appCtx.fill();
 
         appCtx.font = '10px arial';        
+        appCtx.fillText(arr1[i], 200, 50+15*i);  
+        appCtx.fillText(chartValues[i], 250, 50+15*i);
+        appCtx.fillStyle = 'black';        
         appCtx.fillText('Legend by colour: ', 200,20);
         appCtx.fillText('Label', 200, 35); 
-        appCtx.fillText('Value', 250, 35);  
-        appCtx.fillText(arr1[i], 200, 50+15*i);  
-        appCtx.fillText(chartValues[i], 250, 50+15*i);               
+        appCtx.fillText('Value', 250, 35);             
     };
 }
 
@@ -167,7 +168,7 @@ function xYAxis() {
 function histogram(arr1, arr2){     
     xYAxis();        
     for(i=0; i<arr2.length; i++){
-        appCtx.fillStyle = 'rgba(' + Math.floor(255-128*i/arr2.length) +',' + Math.floor(128*i/arr2.length) + ',' + Math.floor(255*i/arr2.length) + ',1)';  
+        appCtx.fillStyle = 'rgba(' + 127*(Math.floor((i+1)/3)%3) +',' + 127*(Math.floor((i+1)/9)%3) + ',' + 127*(Math.floor(i+1)%3) + ',1)';  
         appCtx.fillRect(45+40*i,120-normalize(i, arr2),40,normalize(i, arr2));        
         appCtx.font = '7px arial';
         appCtx.fillText(arr1[i], 45+40*i,130);
@@ -181,7 +182,7 @@ function histogram(arr1, arr2){
 function barChart(arr1, arr2){
     xYAxis();    
     for(i=0; i<arr2.length; i++){
-        appCtx.fillStyle = 'rgba(' + Math.floor(255-128*i/arr2.length) +',' + Math.floor(128*i/arr2.length) + ',' + Math.floor(255*i/arr2.length) + ',1)';   
+        appCtx.fillStyle = 'rgba(' + 127*(Math.floor((i+1)/3)%3) +',' + 127*(Math.floor((i+1)/9)%3) + ',' + 127*(Math.floor(i+1)%3) + ',1)';   
         appCtx.fillRect(55+45*i,120-normalize(i, arr2),30,normalize(i, arr2));
         appCtx.font = '7px arial';
         appCtx.fillText(arr1[i], 55+45*i,130);
