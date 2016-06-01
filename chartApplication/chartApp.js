@@ -42,9 +42,9 @@ function enterData() {
 
 // Delete the last data entered to correct errors
 
-function delData() {
-    let approveDel = confirm('Are you sure you want to delete the last data entered?')
-    if(approveDel) {
+function delData(approve) {
+    approve = confirm('Are you sure you want to delete the last data entered?')
+    if(approve) {
         valueTotal -= chartValues[chartValues.length-1]
         chartLabels.pop();
         chartValues.pop();
@@ -55,7 +55,7 @@ function delData() {
 
 // Accept user command to draw
 
-function drawSelected(){
+function drawSelected(approveChart){
     if (chartValues.length === 0) {
         alert('You have not entered any values yet, please enter some values and try again.')
     }
@@ -69,8 +69,8 @@ function drawSelected(){
                 break;
             }
         }
-        let approveChartDraw = confirm('You are about to draw a ' + radios[i].value + '. Click OK to continue or cancel to choose another chart type.');
-        if (approveChartDraw){
+        approveChart = confirm('You are about to draw a ' + radios[i].value + '. Click OK to continue or cancel to choose another chart type.');
+        if (approveChart){
             draw(chartDiagram);
             // reset the arrays after drawing
             chartLabels = [];
@@ -211,13 +211,10 @@ function lineChart(arr1, arr2){
 function tableHeading() {
     appCtx.beginPath();
     appCtx.strokeRect(45, 0, 120, 15);
-
     appCtx.font = '10px arial';
     appCtx.fillText('Data Labels', 65, 10);
-
     appCtx.strokeRect(165, 0, 120, 15);
     appCtx.fillText('Data Values', 185, 10);
-
     appCtx.strokeStyle = 'black';       
 }
 
@@ -237,6 +234,9 @@ function tableChart(arr1, arr2){
 
 //Clear all charts on Canvas to start new drawing
 
-function clearCharts() {
-    appCtx.clearRect(0, 0, 300, 150);
+function clearCanvas(approve) {
+    approve = confirm('Are you sure you want to clear all drawings and start again?');
+    if(approve) {
+        appCtx.clearRect(0, 0, 300, 150);
+    }    
 }
