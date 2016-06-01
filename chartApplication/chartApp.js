@@ -234,3 +234,9 @@ function tableChart(arr1, arr2){
         appCtx.fillText(arr2[i], 185,25+15*i);
     }
 }
+
+//Clear all charts on Canvas to start new drawing
+
+function clearCharts() {
+    appCtx.clearRect(0, 0, 300, 150);
+}
