@@ -231,8 +231,6 @@ function tableChart(arr1, arr2){
         appCtx.fillText(arr2[i], 185,25+15*i);
     }
 }
-<<<<<<< HEAD
-=======
 
 //Clear all charts on Canvas to start new drawing
 
@@ -242,4 +240,3 @@ function clearCanvas(approve) {
         appCtx.clearRect(0, 0, 300, 150);
     }    
 }
->>>>>>> version1
